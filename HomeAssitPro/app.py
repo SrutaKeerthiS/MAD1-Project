@@ -119,6 +119,8 @@ def home():
         User1=User.query.filter(User.Email==Email and User.Password==password).first()
         if User1 and User1.Role=='admin':
             return render_template('Admin.html')
+        elif User1 and User1.Role=='customer':
+            return render_template('Dashboard.html')
         else:
             return redirect(url_for('home'))
             
@@ -132,12 +134,40 @@ def register(usertypename):
         return redirect(url_for('professional_signup'))
     return "User type not recognized"
 
-@app.route('/customer_signup')
+@app.route('/customer_signup',methods=['POST','GET'])
 def customer_signup():
-    email=request.form.get()
-    pwd=
-    cust1=Customer.query.filter()
-    return render_template('Customer.html')
+    if request.method=='GET':
+        return render_template('Customer.html')
+    elif request.method=='POST':
+        ph=request.form.get('ph')
+        email=request.form.get('email')
+        pwd=request.form.get('pwd')
+        user=User.query.filter(User.Email==email and User.Password==pwd).first()
+        print(user)
+        if user:
+            return render_template('index.html')
+        else:
+            fname=request.form.get('fname')
+            lname=request.form.get('lname')
+            hno=request.form.get('plot')
+            ad1=request.form.get('ad1')
+            ad2=request.form.get('ad2')
+            cty=request.form.get('city')
+            ctry=request.form.get('country')
+            pc=request.form.get('pc')
+
+            user = User(Email=email,Password=pwd,Role='customer')
+            db.session.add(user); 
+            db.session.commit()
+            
+            cust = Customer(FirstName=fname,\
+            LastName=lname,HouseNo=hno,Addressline1=ad1,Addressline2=ad2,\
+            City=cty,Country=ctry,Phoneno=ph,Pincode=pc,UserId=user.UserId)
+            db.session.add(cust); 
+            db.session.commit()
+            return render_template('Submit.html')
+        
+        
 
 
 @app.route('/professional_signup')
