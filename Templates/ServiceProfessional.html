@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    CUSTOMER SIGNUP
-    <form action="/loginUser" method='post' >
+    Service Professional Signup
+    <form action="{{url_for('submit')}}" >
         <p>
         <label for="email">EMAIL </label>
         <input type='email' id="email"value="username/email" > 
@@ -17,18 +17,26 @@
         <input type="password">
         </p>
         <p>
+        <label for="Exp">Experience (in Yrs)</label>
+        <input type="text">
+        </p>
+        <p>
+        <label for="pdf">Attach documents in single PDF</label>
+        <input type="file">
+        </p>
+        <p>
         <label for="full name">Full Name</label>
         <input type="text">
         </p>
         <p>
-        <label for="Service name">Full Name</label>
-        <select id="Service name" name="Sname">
-        <option value="HouseCleaning">Apple</option>
-        <option value="Bathroom Cleaning">Banana</option>
-        <option value="Electrical appliance repair">Cherry</option>
-        <option value="Cooking">Date</option>
-        </select>
-        </p>
+            <label for="Service name">Service Name</label>
+            <select id="Service name" name="Sname">
+            <option value="HouseCleaning">HouseCleaning</option>
+            <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+            <option value="Electrical appliance repair">Electrical appliance repair</option>
+            <option value="Cooking">Cooking</option>
+            </select>
+            </p>
         <p>
         <label for="Address">Full Address</label>
         <input type="text">
